@@ -1,0 +1,12 @@
+apiVersion : v1 # Gives us access to a different set of "kinds" to specify
+kind : Pod # Set of containers tightly related
+metadata:
+  name: client-pod # name of the POD
+  labels:
+    component: web # Label to use to make networking right
+spec:
+  containers:
+    - name: client # Name of the container inside the POD so other containers inside the POD can communicate with this name
+      image: stephengrider/multi-worker # image on the hub.docker public images
+      ports:
+        - containerPort: 5000 # Port to expose

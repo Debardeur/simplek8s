@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service # Networking service that's gonna route from kube-proxy to our POD in the current NODE
+metadata:
+  name: client-node-port
+spec:
+  type: NodePort
+  ports:
+    - port: 3050 # Port that another POD can use to access our POD
+      targetPort: 3000 # Port that is exposed in the client pod
+      nodePort: 31000 # Port that we put in the browser to visit our app (random 30 000 - 32 767) => JUST FOR DEVELOPMENT PURPOSES !!!
+  selector:
+    component: web # Key value pair that has to be the same in labels in client-pod.yml, we could also have named it tier:frontend or something
